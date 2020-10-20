@@ -76,21 +76,8 @@ public class HomeController {
 	@GetMapping("getStaffByCourseNumber")
 	public String getStaffByCourseNumber(@RequestParam String courseNumber, Model m) {
 		System.out.println("Requested a courses by Course Number...");
-
-		// m.addAttribute("course", sqlRepo.getAll());
-		// m.addAttribute("staffs", courseRepo.getOne(courseNumber).getStaffs());
-		// m.addAttribute("students", courseRepo.getOne(courseNumber).getStudents());
 		return "showCoursesAndStaffs";
 	}
 
-	/*
-	 * @GetMapping("getAlienByName") public String getAlien(@RequestParam String
-	 * name, Model m) {
-	 * 
-	 * //m.addAttribute("aliens", repo.findByName(name)); //m.addAttribute("aliens",
-	 * repo.findByNameOrderByAgeDesc(name)); //m.addAttribute("aliens",
-	 * repo.find(name)); m.addAttribute("aliens", repo.findOneByName(name));
-	 * 
-	 * return "showAliens"; }
-	 */
+
 }

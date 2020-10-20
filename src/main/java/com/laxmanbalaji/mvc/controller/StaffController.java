@@ -41,6 +41,26 @@ public class StaffController {
 		return "staffInfo";
 	}
 
+	@RequestMapping("/findCoursesByStaff")
+	public String getCoursesById(@RequestParam int staffId, Model m) {
+		System.out.println("Requested staff by ID...");
+		m.addAttribute("hide", 2);
+		m.addAttribute("staffId", staffId);
+		m.addAttribute("courses", staffRepo.getCourseByStaffId(staffId));
+		return "staffInfo";
+	}
+
+	@RequestMapping("/removeCourse")
+	public String removeCourse(@RequestParam String courseNumber, @RequestParam int staffId, Model m) {
+		System.out.println("Remove course staff by ID...");
+		//System.out.println(staffId);
+		System.out.println(courseNumber);
+		System.out.println("Remove course staff by ID...");
+		m.addAttribute("hide", 0);
+		staffRepo.removeCourse(courseNumber, staffId);
+		return "staffInfo";
+	}
+
 	@RequestMapping("/findStaffBySalary")
 	public String getStaffBySalary(@RequestParam int salaryStart, @RequestParam int salaryEnd, Model m) {
 		System.out.println("Requested staff by Salary...");

@@ -26,7 +26,8 @@
 					</p>
 					<p class="card-text">
 					<form action="/course/findCourseByNumber" method="post">
-						Find Details By Course Number: <input type="text" name="courseNumber">
+						Find Details By Course Number: <input type="text"
+							name="courseNumber">
 						<button type="submit" class="btn btn-primary">Submit</button>
 					</form>
 					<p class="card-text">
@@ -38,7 +39,7 @@
 					</form>
 					</p>
 
-					<p class="card-text">
+		 			<p class="card-text">
 					<form action="/course/addCourseForm">
 
 						<button type="submit" class="btn btn-primary">Form for
@@ -76,12 +77,17 @@
 
 				</tbody>
 			</table>
+			<form action="/course/removeCourse">
+				<button type="submit" class="btn btn-primary" name="courseNumber"
+					value="${course.getCourseNumber()}">Remove Course</button>
+			</form>
+
 		</c:if>
 
 		<br>
 
 		<c:if test="${hide == 2}">
-			<p class="d-flex justify-content-center">Course Number 
+			<p class="d-flex justify-content-center">Course Number
 				${courseNumber}</p>
 			<table class="table table-striped table-bordered my-3">
 				<thead>

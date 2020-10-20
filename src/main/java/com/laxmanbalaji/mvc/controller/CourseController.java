@@ -40,28 +40,37 @@ public class CourseController {
 		m.addAttribute("course", courseRepo.getCourseByNumber(courseNumber));
 		return "courseInfo";
 	}
-	
+
 	@RequestMapping("/findStudentsByCourseNumber")
 	public String getStudentsByCourseNumber(@RequestParam String courseNumber, Model m) {
 		System.out.println("Requested student by Course Number...");
 		m.addAttribute("hide", 2);
-		m.addAttribute("courseNumber",courseNumber);
+		m.addAttribute("courseNumber", courseNumber);
 		m.addAttribute("students", courseRepo.getStudents(courseNumber));
 		return "courseInfo";
 	}
-	
+
+	@RequestMapping("/removeCourse")
+	public String removeCourse(@RequestParam String courseNumber, Model m) {
+		System.out.println("Remove course by ID...");
+		m.addAttribute("hide", 0);
+		courseRepo.removeCourse(courseNumber);
+		return "courseInfo";
+	}
+
 	@RequestMapping("/addCourseForm")
 	public String addCourseForm() {
 		System.out.println("Course Form is requested...");
 		return "addCourse";
 	}
-	
+
 	@RequestMapping("/addCourseForm/submit")
-	public String addCourse(@RequestParam String courseName, @RequestParam int courseFee, @RequestParam int courseNumber,
-			Model m) {
+	public String addCourse(@RequestParam String courseName, @RequestParam int courseFee,
+			@RequestParam String courseNumber, Model m) {
 		System.out.println("Course Form is submitted...");
 		try {
-			courseRepo.insertCourse(courseNumber, courseName, courseFee);;
+			courseRepo.insertCourse(courseNumber, courseName, courseFee);
+			;
 		} catch (Exception e) {
 			m.addAttribute("submission", 1);
 			return "addCourse";
@@ -70,43 +79,4 @@ public class CourseController {
 		return "addCourse";
 	}
 
-
-	/*
-	@RequestMapping("/findAllCourses/Tuition")
-	public String getcoursesTuition(Model m) {
-		System.out.println("Requested all courses...");
-
-		m.addAttribute("courses", courseRepo.getTuition());
-		return "showCoursesTotal";
-	}
-
-	@RequestMapping("/addCourseForm")
-	public String addCourseForm() {
-		System.out.println("Course Form is requested...");
-		return "addCourse";
-	}
-
-	@RequestMapping("/addCourseForm/submit")
-	public String addCourse(@RequestParam String gender, @RequestParam String courseName, @RequestParam int courseId,
-			Model m) {
-		System.out.println("Course Form is requested...");
-		try {
-			courseRepo.insertCourse(courseId, courseName, gender);
-		} catch (Exception e) {
-			m.addAttribute("submission", 1);
-			return "addCourse";
-		}
-		m.addAttribute("submission", 2);
-		return "addCourse";
-	}*/
-
-	/*
-	 * @RequestMapping("/findcourseBySalary") public String
-	 * getcourseBySalary(@RequestParam int salaryStart, @RequestParam int
-	 * salaryEnd, Model m) { System.out.println("Requested course by Salary...");
-	 * m.addAttribute("hide", 1); m.addAttribute("salaryStart", salaryStart);
-	 * m.addAttribute("salaryEnd", salaryEnd); m.addAttribute("courses",
-	 * courseRepo.getcourseBySalary(salaryStart, salaryEnd)); return
-	 * "showcourses"; }
-	 */
 }

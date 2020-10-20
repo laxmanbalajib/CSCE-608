@@ -38,6 +38,12 @@
 					</form>
 					</p>
 					<p class="card-text">
+					<form action="/staff/findCoursesByStaff" method="post">
+						Find Courses Taught By Staff Id: <input type="text" name="staffId">
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</form>
+					</p>
+					<p class="card-text">
 					<form action="/staff/addStaffForm">
 
 						<button type="submit" class="btn btn-primary">Form for
@@ -72,6 +78,36 @@
 
 				</tbody>
 			</table>
+		</c:if>
+		<c:if test="${hide == 2}">
+			<table class="table table-striped table-bordered">
+				<thead>
+					<tr>
+						<th scope="col">Course Number</th>
+						<th scope="col">Course Name</th>
+						<th scope="col">Course Drop</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="course" items="${courses}">
+						<tr>
+
+							<td>${course.getCourseNumber()}</td>
+							<td>${course.getCourseName()}</td>
+							<td>
+							<form action="/staff/removeCourse">
+								<input type="hidden" name="staffId" value="${staffId}">
+								<button type="submit" class="btn btn-primary"
+									name="courseNumber" value="${course.getCourseNumber()}">Drop
+								</button>
+							</form></td>
+						</tr>
+					</c:forEach>
+
+				</tbody>
+			</table>
+
+
 		</c:if>
 		<br>
 

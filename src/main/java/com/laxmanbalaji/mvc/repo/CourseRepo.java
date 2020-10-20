@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.laxmanbalaji.mvc.interfaces.CourseAndStaff;
 import com.laxmanbalaji.mvc.interfaces.CourseAndStudent;
 import com.laxmanbalaji.mvc.model.Course;
 import com.laxmanbalaji.mvc.model.Student;
@@ -27,7 +28,11 @@ public interface CourseRepo extends CrudRepository<Course, String> {
 	@Modifying
 	@Query(value = "INSERT INTO Course(courseNumber, courseName, courseFee) VALUES(:courseNumber, :courseName, :courseFee)", nativeQuery = true)
 	@Transactional
-	void insertCourse(int courseNumber, String courseName, int courseFee);
+	void insertCourse(String courseNumber, String courseName, int courseFee);
 	
 
+	@Modifying
+	@Query(value = "DELETE FROM Course WHERE courseNumber = :courseNumber", nativeQuery = true)
+	@Transactional
+	void removeCourse(String courseNumber);
 }

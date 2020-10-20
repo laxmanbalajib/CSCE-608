@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.laxmanbalaji.mvc.interfaces.CourseAndStaff;
 import com.laxmanbalaji.mvc.model.Staff;
 
 public interface StaffRepo extends CrudRepository<Staff, Integer> {
@@ -24,4 +25,12 @@ public interface StaffRepo extends CrudRepository<Staff, Integer> {
 	@Query(value = "INSERT INTO Staff(id, name, gender) VALUES(:staffId, :staffName, :gender)", nativeQuery = true)
 	@Transactional
 	void insertStaff(int staffId, String staffName, String gender);
+	
+	@Query(value = "SELECT * FROM (SELECT * FROM Course NATURAL JOIN Teach) AS b WHERE b.staffId = :staffId", nativeQuery = true)
+	List<CourseAndStaff>getCourseByStaffId(int staffId);
+
+	@Modifying
+	@Query(value = "DELETE FROM Teach WHERE courseNumber = :courseNumber AND staffId = :staffId", nativeQuery = true)
+	@Transactional
+	void removeCourse(String courseNumber, int staffId);
 }

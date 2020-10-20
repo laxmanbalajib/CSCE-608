@@ -11,17 +11,19 @@
 <title>Course Form</title>
 <SCRIPT LANGUAGE="JavaScript">
 	function checker() {
-		result = document.addCourse.courseId.value;
-		var integer = parseInt(result);
-		if (!Number.isInteger(integer)) {
-			alert("Sorry, that's not a valid course Id.")
-			return false
-		}
+
 
 		result = document.addCourse.courseName.value;
 
 		if (result == null || result == "") {
 			alert("Sorry, that's not a valid course Name")
+			return false
+		}
+		
+		result = document.addCourse.courseNumber.value;
+
+		if (result == null || result == "") {
+			alert("Sorry, that's not a valid course Number")
 			return false
 		}
 
@@ -33,7 +35,7 @@
 		style="position: absolute; top: 150px; bottom: 0; left: 0; right: 0; margin: auto;">
 		<p class=" d-flex justify-content-center"
 			style="background: #FF0000; color: white;">
-			<c:if test="${submission == 1 }">Your submission wasn't successful (Check your Course Id)</c:if>
+			<c:if test="${submission == 1 }">Your submission wasn't successful (Check your Course Number)</c:if>
 		</p>
 		<p class=" d-flex justify-content-center"
 			style="background: #00e500; color: white;">
